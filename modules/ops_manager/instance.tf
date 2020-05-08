@@ -17,6 +17,10 @@ resource "google_compute_instance" "ops-manager" {
     }
   }
 
+  scratch_disk {
+    interface = "NVME"
+  }
+  
   network_interface {
     subnetwork = "${var.subnet}"
 
