@@ -20,16 +20,6 @@ resource "google_compute_instance" "ops-manager" {
   scratch_disk {
     interface = "NVME"
   }
-  
-  metadata_startup_script = <<EOF
-mkfs.ext4 /dev/nvme0n1 && 
-mkdir /localssd && 
-mount /dev/nvme01n1 /localssd &&
-cp -ar /var/tempest /localssd/tempest &&
-cp -ar /home /local/home &&
-mount --bind /localssd/tempest /var/tempest &&
-mount --bind /localssd/home /home
-EOF
 
   network_interface {
     subnetwork = "${var.subnet}"
